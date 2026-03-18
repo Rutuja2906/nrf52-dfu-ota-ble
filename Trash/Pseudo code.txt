@@ -1,0 +1,74 @@
+##################### Figure4.1 ####################
+
+// Register the connection callbacks
+call bt_conn_cb_register with connection_callbacks
+
+// Define a passkey
+set passkey to 123456
+
+// Register the authentication callbacks
+set err to result of bt_conn_auth_cb_register with conn_auth_callbacks
+
+if err is not 0 then
+    log "Failed to register authorization callbacks" with error code err
+    return err
+else
+    log "Authorization callbacks registered successfully" with error code err
+
+// Set the Bluetooth passkey
+call bt_passkey_set with passkey
+
+
+##################### Figure4.3 ####################
+
+function on_connected(conn, err)
+    if err is not 0 then
+        log "Connection failed" with error code err
+        return
+
+    if device is not bonded (bt_conn_is_bonded(conn) returns false) then
+        set err to result of bt_conn_set_security(conn, BT_SECURITY_L4)
+
+        if err is not 0 then
+            log "Failed to set security level" with error code err
+
+            set ret to result of bt_conn_disconnect(conn, BT_HCI_ERR_REMOTE_USER_TERM_CONN)
+
+            if ret is not 0 then
+                log "Failed to disconnect" with error code ret
+            else
+                log "Disconnected device due to security failure"
+
+            return
+    else
+        log "Device is already bonded"
+
+
+
+##################### Figure4.8 ####################
+
+function advertise_with_acceptlist(work)
+    set err to 0
+    set allowed_cnt to result of setup_accept_list(BT_ID_DEFAULT)
+
+    if allowed_cnt is less than 0 then
+        log "Acceptlist setup failed" with error code allowed_cnt
+    else
+        if allowed_cnt is 0 then
+            log "Advertising with no Accept list"
+            set err to result of bt_le_adv_start(BT_LE_ADV_CONN_NO_ACCEPT_LIST, ad, size of ad, sd, size of sd)
+        else
+            log "Acceptlist setup number = allowed_cnt"
+            set err to result of bt_le_adv_start(BT_LE_ADV_CONN_ACCEPT_LIST, ad, size of ad, sd, size of sd)
+
+        if err is not 0 then
+            log "Advertising failed to start" with error code err
+            return
+
+        log "Advertising successfully started"
+
+    call k_work_init(work, advertise_with_acceptlist) to reinitialize work item
+
+
+
+

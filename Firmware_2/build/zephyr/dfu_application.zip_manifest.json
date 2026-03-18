@@ -1,0 +1,25 @@
+{
+    "format-version": 0,
+    "time": 1746887334,
+    "files": [
+        {
+            "load_address": 49664,
+            "version_MCUBOOT": "0.0.0+0",
+            "type": "application",
+            "board": "nrf52dk_nrf52832",
+            "soc": "nRF52832_QFAA",
+            "size": 204683,
+            "file": "app_update.bin",
+            "modtime": 1746887334
+        }
+    ],
+    "name": "Firmware_2",
+    "firmware": {
+        "zephyr": {
+            "revision": null
+        },
+        "nrf": {
+            "revision": "750a0eab914e23669ffa93982578afbaff2af254"
+        }
+    }
+}

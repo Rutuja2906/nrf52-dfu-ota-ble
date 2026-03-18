@@ -1,0 +1,14 @@
+{
+  "board": "nrf52dk_nrf52832",
+  "boardRevision": "",
+  "boardDir": "c:/ncs/v2.5.2/zephyr/boards/arm/nrf52dk_nrf52832",
+  "shouldBuild": true,
+  "optimizations": "none",
+  "cmakeArgs": [],
+  "confFiles": [],
+  "buildDirectory": "build",
+  "kconfigFragments": [],
+  "snippets": [],
+  "dtcOverlays": [],
+  "extraDtcOverlays": []
+}
