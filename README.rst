@@ -71,7 +71,3 @@ Characteristic: Health status string (e.g., "OK", "Mild", "Critical", "Sensor Er
 Update Method: Periodic status updates every 15 seconds using a k_work_delayable
 Trigger Condition: Only notifies the central if a BLE connection is active
 Notification Format: Human-readable UTF-8 strings, allowing easy debugging or mobile app integration
-
-Project Report
-
-Presentation
